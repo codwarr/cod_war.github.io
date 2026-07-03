@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>کالاف وار</title>
+
+<style>
+@font-face {
+    font-family: 'myfont';
+    src: url('font.ttf');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    font-family: 'myfont';
+    color: #e8c98a;
+}
+
+.music-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 45px;
+    height: 45px;
+    background: #000000aa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e0c27a;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.header-box {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.header-img {
+    width: 100%;
+    display: block;
+    filter: brightness(70%) contrast(120%) saturate(110%);
+}
+
+.overlay {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 5;
+}
+
+.title {
+    font-size: 40px;
+    color: #e8c98a;
+    text-shadow: 0 0 15px rgba(255,200,120,0.5);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 22px;
+    color: #d8b878;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px rgba(255,200,120,0.4);
+}
+
+.btn {
+    display: block;
+    width: 70%;
+    margin: 10px auto;
+    padding: 14px;
+    font-size: 22px;
+    text-align: center;
+    color: #f5e4b0;
+    background: #2a2414;
+    border: 3px solid #c9b06a;
+    border-radius: 14px;
+    text-decoration: none;
+}
+
+.btn-bale {
+    background: linear-gradient(135deg, #7b5f2a, #2a2414);
+    border-color: #e0c27a;
+}
+</style>
+</head>
+
+<body>
+
+<div class="music-btn" onclick="toggleMusic()">🔊</div>
+
+<script>
+function toggleMusic() {
+    window.parent.postMessage("toggleMusic", "*");
+}
+</script>
+
+<div class="header-box">
+    <img src="1.jpg" class="header-img">
+
+    <div class="overlay">
+        <h1 class="title">کالاف وار</h1>
+        <h2 class="subtitle">خفن ترین اتچمنت ها و اخبار با ما</h2>
+
+        <a class="btn" href="attachments.html" target="_parent">اتچمنت‌ها ⚔️</a>
+        <a class="btn" href="news.html" target="_parent">اخبار 📝</a>
+        <a class="btn btn-bale" href="https://ble.ir/cod_war" target="_blank">ورود به چنل بله</a>
+    </div>
+</div>
+
+</body>
+</html>
