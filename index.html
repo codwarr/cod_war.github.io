@@ -19,6 +19,7 @@ body {
     color: #e8c98a;
 }
 
+/* دکمه صدا */
 .music-btn {
     position: fixed;
     top: 15px;
@@ -33,7 +34,7 @@ body {
     color: #e0c27a;
     font-size: 22px;
     cursor: pointer;
-    z-index: 999;
+    z-index: 9999;
 }
 
 .header-box {
@@ -95,11 +96,16 @@ body {
 
 <body>
 
+<!-- موزیک فقط اینجا -->
+<audio id="bgMusic" src="music.mp3" loop></audio>
+
 <div class="music-btn" onclick="toggleMusic()">🔊</div>
 
 <script>
 function toggleMusic() {
-    window.parent.postMessage("toggleMusic", "*");
+    const m = document.getElementById("bgMusic");
+    if (m.paused) m.play();
+    else m.pause();
 }
 </script>
 
@@ -110,8 +116,8 @@ function toggleMusic() {
         <h1 class="title">کالاف وار</h1>
         <h2 class="subtitle">خفن ترین اتچمنت ها و اخبار با ما</h2>
 
-        <a class="btn" href="attachments.html" target="_parent">اتچمنت‌ها ⚔️</a>
-        <a class="btn" href="news.html" target="_parent">اخبار 📝</a>
+        <a class="btn" href="attachments.html">اتچمنت‌ها ⚔️</a>
+        <a class="btn" href="news.html">اخبار 📝</a>
         <a class="btn btn-bale" href="https://ble.ir/cod_war" target="_blank">ورود به چنل بله</a>
     </div>
 </div>
