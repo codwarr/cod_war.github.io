@@ -5,25 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>کالاف وار</title>
 
-<!-- لود فوق‌سریع تصویر -->
+<!-- لود فوری تصویر -->
 <link rel="preload" href="1.jpg" as="image">
 
 <style>
-@font-face {
-    font-family: 'myfont';
-    src: url('font.ttf');
-}
-
-/* بک‌گراند اصلی از 1.jpg */
 body {
     margin: 0;
     padding: 0;
-    background:
-        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-        url("1.jpg") no-repeat center center fixed;
+
+    /* تصویر سریع و بدون مکث */
+    background-image: url("1.jpg");
     background-size: cover;
-    font-family: 'myfont';
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* اول با کیفیت پایین → بعد شارپ */
+    image-rendering: crisp-edges;
+
+    font-family: sans-serif;
     color: #e8c98a;
+}
+
+/* لایه تاریک جدا تا تصویر دیر نشه */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: -1;
 }
 
 /* دکمه صدا */
@@ -49,8 +58,6 @@ body {
     width: 100%;
     text-align: center;
     padding: 40px 20px;
-    box-sizing: border-box;
-    z-index: 20;
 }
 
 .title {
@@ -93,25 +100,18 @@ body {
 <!-- موزیک -->
 <audio id="bgMusic" src="music.mp3" preload="auto" loop></audio>
 
-<div class="music-btn" onclick="toggleMusic()">🔊</div>
+<!-- دکمه صدا -->
+<div class="music-btn" onclick="startMusic()">🔊</div>
 
 <script>
-/* موزیک با اولین کلیک کاربر فوراً شروع میشه */
-let musicStarted = false;
-
-document.addEventListener("click", () => {
-    if (!musicStarted) {
-        const m = document.getElementById("bgMusic");
-        m.play();
-        musicStarted = true;
-    }
-});
-
-/* دکمه صدا */
-function toggleMusic() {
+/* فقط وقتی روی دکمه صدا بزنی موزیک شروع میشه */
+function startMusic() {
     const m = document.getElementById("bgMusic");
-    if (m.paused) m.play();
-    else m.pause();
+
+    m.play().catch(() => {
+        // اگر مرورگر گیر داد دوباره تلاش کنه
+        setTimeout(() => m.play().catch(()=>{}), 200);
+    });
 }
 </script>
 
