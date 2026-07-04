@@ -96,11 +96,22 @@ body {
 <div class="music-btn" onclick="toggleMusic()">🔊</div>
 
 <script>
+/* موزیک با اولین کلیک کاربر فوراً شروع میشه */
+let musicStarted = false;
+
+document.addEventListener("click", () => {
+    if (!musicStarted) {
+        const m = document.getElementById("bgMusic");
+        m.play();
+        musicStarted = true;
+    }
+});
+
+/* دکمه صدا */
 function toggleMusic() {
     const m = document.getElementById("bgMusic");
-    m.play(); // شروع سریع
-    if (!m.paused) m.pause();
-    else m.play();
+    if (m.paused) m.play();
+    else m.pause();
 }
 </script>
 
