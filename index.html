@@ -11,6 +11,7 @@
 @font-face {
     font-family: 'myfont';
     src: url('font.ttf') format('truetype');
+    font-display: swap;
 }
 
 /* بک‌گراند فیکس */
@@ -120,13 +121,11 @@ function toggleMusic() {
     const m = document.getElementById("bgMusic");
 
     if (firstClick) {
-        // اولین کلیک → فقط پخش
         m.play().catch(()=>{});
         firstClick = false;
         return;
     }
 
-    // بعد از اولین کلیک → قطع/وصل
     if (m.paused) m.play();
     else m.pause();
 }
