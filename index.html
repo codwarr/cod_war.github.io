@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>کالاف وار</title>
 
-<!-- لود سریع بک‌گراند -->
-<link rel="preload" href="https://cdn.imgurl.ir/uploads/i789703_1.jpg" as="image">
+<!-- لود فوق‌سریع تصویر -->
+<link rel="preload" href="1.jpg" as="image">
 
 <style>
 @font-face {
@@ -14,13 +14,13 @@
     src: url('font.ttf');
 }
 
-/* بک‌گراند اصلی */
+/* بک‌گراند اصلی از 1.jpg */
 body {
     margin: 0;
     padding: 0;
     background:
-        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-        url("https://cdn.imgurl.ir/uploads/i789703_1.jpg") no-repeat center center fixed;
+        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+        url("1.jpg") no-repeat center center fixed;
     background-size: cover;
     font-family: 'myfont';
     color: #e8c98a;
@@ -90,16 +90,17 @@ body {
 
 <body>
 
-<!-- موزیک فقط اینجا -->
-<audio id="bgMusic" src="music.mp3" loop></audio>
+<!-- موزیک -->
+<audio id="bgMusic" src="music.mp3" preload="auto" loop></audio>
 
 <div class="music-btn" onclick="toggleMusic()">🔊</div>
 
 <script>
 function toggleMusic() {
     const m = document.getElementById("bgMusic");
-    if (m.paused) m.play();
-    else m.pause();
+    m.play(); // شروع سریع
+    if (!m.paused) m.pause();
+    else m.play();
 }
 </script>
 
