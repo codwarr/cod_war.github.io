@@ -5,34 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>کالاف وار</title>
 
-<!-- لود فوری تصویر -->
 <link rel="preload" href="1.jpg" as="image">
 
 <style>
-body {
-    margin: 0;
-    padding: 0;
-
-    /* تصویر سریع و بدون مکث */
+/* بک‌گراند فیکس واقعی */
+.bg-fixed {
+    position: fixed;
+    inset: 0;
     background-image: url("1.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
-    /* اول با کیفیت پایین → بعد شارپ */
+    z-index: -2;
     image-rendering: crisp-edges;
-
-    font-family: sans-serif;
-    color: #e8c98a;
 }
 
-/* لایه تاریک جدا تا تصویر دیر نشه */
-body::before {
-    content: "";
+/* لایه تاریک */
+.bg-dark {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.35);
     z-index: -1;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: #e8c98a;
 }
 
 /* دکمه صدا */
@@ -58,6 +58,8 @@ body::before {
     width: 100%;
     text-align: center;
     padding: 40px 20px;
+    position: relative;
+    z-index: 10;
 }
 
 .title {
@@ -97,6 +99,10 @@ body::before {
 
 <body>
 
+<!-- بک‌گراند فیکس واقعی -->
+<div class="bg-fixed"></div>
+<div class="bg-dark"></div>
+
 <!-- موزیک -->
 <audio id="bgMusic" src="music.mp3" preload="auto" loop></audio>
 
@@ -104,12 +110,9 @@ body::before {
 <div class="music-btn" onclick="startMusic()">🔊</div>
 
 <script>
-/* فقط وقتی روی دکمه صدا بزنی موزیک شروع میشه */
 function startMusic() {
     const m = document.getElementById("bgMusic");
-
     m.play().catch(() => {
-        // اگر مرورگر گیر داد دوباره تلاش کنه
         setTimeout(() => m.play().catch(()=>{}), 200);
     });
 }
