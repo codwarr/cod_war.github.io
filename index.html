@@ -8,7 +8,12 @@
 <link rel="preload" href="1.jpg" as="image">
 
 <style>
-/* بک‌گراند فیکس واقعی */
+@font-face {
+    font-family: 'myfont';
+    src: url('font.ttf') format('truetype');
+}
+
+/* بک‌گراند فیکس */
 .bg-fixed {
     position: fixed;
     inset: 0;
@@ -31,7 +36,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'myfont';
     color: #e8c98a;
 }
 
@@ -99,7 +104,6 @@ body {
 
 <body>
 
-<!-- بک‌گراند فیکس واقعی -->
 <div class="bg-fixed"></div>
 <div class="bg-dark"></div>
 
@@ -107,14 +111,24 @@ body {
 <audio id="bgMusic" src="music.mp3" preload="auto" loop></audio>
 
 <!-- دکمه صدا -->
-<div class="music-btn" onclick="startMusic()">🔊</div>
+<div class="music-btn" onclick="toggleMusic()">🔊</div>
 
 <script>
-function startMusic() {
+let firstClick = true;
+
+function toggleMusic() {
     const m = document.getElementById("bgMusic");
-    m.play().catch(() => {
-        setTimeout(() => m.play().catch(()=>{}), 200);
-    });
+
+    if (firstClick) {
+        // اولین کلیک → فقط پخش
+        m.play().catch(()=>{});
+        firstClick = false;
+        return;
+    }
+
+    // بعد از اولین کلیک → قطع/وصل
+    if (m.paused) m.play();
+    else m.pause();
 }
 </script>
 
